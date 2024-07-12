@@ -1,20 +1,16 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 from pages.base_page import BasePage
 
-class SearchQuestion(BasePage):
+class SearchQuestionPage(BasePage):
     @allure.step('Поиск нужного вопроса')
-    def scroll_question(self, locator, time=20):
-        element = WebDriverWait(self.driver, time).until(EC.visibility_of_element_located(locator))
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-        return element
+    def scroll_question(self, locator):
+        self.scroll_to_view(locator)
 
     @allure.step('Нажимаем на копку  {locator}')
-    def find_question(self, locator):
+    def find_question(self, locator, time = 20):
         self.scroll_question(locator)
-        self.find_element_clickable(locator).click()
+        self.find_element_clickable(locator, time).click()
 
     @allure.step('Поиск ответа  {locator}')
     def drop_down_text(self, locator, time = 10):
