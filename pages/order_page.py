@@ -1,16 +1,14 @@
 import allure
 
 from selenium.webdriver import Keys
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from Locators.Main import Main
-from Locators.Order import Order
-from pages.main_page import MaimPage
+from Locators.order import Order
+from pages.base_page import BasePage
 
 
-class OrderPage(MaimPage):
+class OrderPage(BasePage):
     @allure.step('Нажимаем на копку  {locator}')
     def data_input_click_order_top(self, locator):
         self.find_element_located(locator).click()
@@ -30,8 +28,7 @@ class OrderPage(MaimPage):
         metro_field = self.find_element_located(Order.METRO_STATION)
         metro_field.click()
         metro_field.send_keys(metro_station)
-
-        metro_option_locator = (By.XPATH, f"//div[@class='select-search__select']//*[contains(text(), '{metro_station}')]")
+        metro_option_locator = Order.metro_option_locator(metro_station)
         self.find_element_located(metro_option_locator).click()
 
         self.find_element_located(Order.PHONE).send_keys(phone)
@@ -43,9 +40,11 @@ class OrderPage(MaimPage):
         date_field.click()
         date_field.send_keys(date)
         date_field.send_keys(Keys.ENTER)
+
         self.find_element_located(Order.RENT_PERIOD).click()
-        period_option = f"//div[@class='Dropdown-menu']/div[text()='{period}']"
-        self.find_element_located((By.XPATH, period_option)).click()
+        period_option = Order.period_option_locator(period)
+        self.find_element_located(period_option).click()
+
         color_locator = Order.COLOR_SCOOTER_1 if color == "black" else Order.COLOR_SCOOTER_2
         self.find_element_located(color_locator).click()
         self.find_element_located(Order.COMMENTS).send_keys(comment)
@@ -58,14 +57,4 @@ class OrderPage(MaimPage):
     @allure.step('Всплывающее окно успешного оформления заказа')
     def check_success_popup(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((Order.SUCCESS_POPUP)))
-
-    @allure.step('Нажатие на логотип Самоката')
-    def click_scooter_logo(self):
-        self.find_element_located(Main.SCOOTER_LOLO).click()
-
-    @allure.step('Нажатие на логотип Яндекса')
-    def click_yandex_logo(self):
-        self.find_element_located(Main.YA_LOLO).click()
-        self.driver.switch_to.window(self.driver.window_handles[-1])
-        WebDriverWait(self.driver, 10).until(EC.url_contains("dzen.ru"))
 

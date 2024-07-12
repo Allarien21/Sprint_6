@@ -2,9 +2,9 @@ import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from pages.main_page import MaimPage
+from pages.base_page import BasePage
 
-class SearchQuestion(MaimPage):
+class SearchQuestion(BasePage):
     @allure.step('Поиск нужного вопроса')
     def scroll_question(self, locator, time=20):
         element = WebDriverWait(self.driver, time).until(EC.visibility_of_element_located(locator))
