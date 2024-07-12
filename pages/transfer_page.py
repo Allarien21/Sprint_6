@@ -3,7 +3,7 @@ import allure
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from Locators.main import Main
+from Locators.main_locator import Main
 from pages.base_page import BasePage
 
 class Transfer(BasePage):

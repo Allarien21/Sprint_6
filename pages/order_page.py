@@ -4,7 +4,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from Locators.order import Order
+from Locators.order_locator import Order
 from pages.base_page import BasePage
 
 

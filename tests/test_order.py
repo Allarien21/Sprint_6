@@ -2,7 +2,7 @@ import allure
 
 import pytest
 
-from Locators.order import Order
+from Locators.order_locator import Order
 from pages.order_page import OrderPage
 from Locators.data import order_data
 

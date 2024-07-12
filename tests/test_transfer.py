@@ -1,6 +1,6 @@
 import allure
 
-from Locators.order import Order
+from Locators.order_locator import Order
 from pages.transfer_page import Transfer
 
 

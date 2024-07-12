@@ -1,4 +1,4 @@
-from Locators.transition import Transition
+from Locators.transition_locator import Transition
 
 order_data = [
         {
